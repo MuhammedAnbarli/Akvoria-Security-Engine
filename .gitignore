@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Runtime data — never commit
+storage/
+config/ase.json
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+ase_api.key
+*.key
+*.pem
+
+# Quarantine contents
+quarantine/
+
+# Release artifacts
+dist/
+build/
+*.zip
+*.sha256
+
+# OS noise
+.DS_Store
+Thumbs.db

@@ -1,0 +1,4 @@
+# AKVORIA Security Engine has no mandatory third-party dependencies.
+# It runs on the Python 3.10+ standard library alone.
+#
+# Optional extras are listed in requirements-optional.txt.

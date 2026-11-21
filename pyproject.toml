@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "akvoria-security-engine"
+version = "0.1.0b1"
+description = "Local defensive security engine: scanning, monitoring, quarantine and explainable alerting."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "AKVORIA" }]
+keywords = ["security", "antivirus", "monitoring", "defensive", "local"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+]
+dependencies = []
+
+[project.optional-dependencies]
+crypto = ["cryptography>=42.0"]
+yara = ["yara-python>=4.5"]
+dev = []
+
+[project.scripts]
+ase = "main:main"
+
+[project.urls]
+Documentation = "https://github.com/akvoria/akvoria-security-engine#readme"
+
+[tool.setuptools]
+py-modules = ["main"]
+
+[tool.setuptools.packages.find]
+include = ["core*", "modules*"]
+exclude = ["tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

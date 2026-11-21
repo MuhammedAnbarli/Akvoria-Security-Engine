@@ -1,0 +1,12 @@
+AKVORIA ASE LOCAL 1.3.0 — VERIFICATION
+
+Python compileall: PASS
+Unit tests: 44 passed, 0 failed, 0 errors
+API integration: POST /api/scan PASS; POST /api/indicators PASS; GET /api/processes PASS; GET /api/network/connections PASS; unauthenticated scan rejected (401) PASS
+Config validation: loopback-only API PASS; symlink following rejected PASS
+Database: schema migration PASS; database symlink rejected PASS
+Event bus isolation: PASS
+File baseline/integrity: PASS
+Antivirus/quarantine existing suite: PASS
+
+Environment: Linux test runtime. Android/Termux and Windows device-level validation not performed.

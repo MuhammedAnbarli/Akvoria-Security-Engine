@@ -1,0 +1,4 @@
+# Optional: Ed25519 verification for signed offline threat feeds
+cryptography>=42.0
+# Optional: richer YARA rule scanning when available
+yara-python>=4.5

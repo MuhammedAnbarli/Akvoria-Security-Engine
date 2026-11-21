@@ -1,0 +1,50 @@
+name: security
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Secret and dependency scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reject committed runtime artifacts
+        shell: bash
+        run: |
+          set -eu
+          fail=0
+          for pattern in '*.db' 'ase_api.key' 'storage/**' '__pycache__/**'; do
+            if git ls-files -- "$pattern" | grep -q .; then
+              echo "::error::Committed runtime artifact matching $pattern"
+              git ls-files -- "$pattern"
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Scan for high-confidence secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Verify API hardening claims
+        run: |
+          python -m unittest tests.test_api_security -v
+          python -m unittest tests.test_api_integration -v
